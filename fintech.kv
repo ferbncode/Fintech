@@ -1,0 +1,38 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import main main
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+<welcome_screen>:
+	Button:
+		text: "Start Using the app"
+		pos: 150, 0
+		size_hint: 0.4,.2
+	Label:
+		text: ' Financial Tracker '
+		pos:150, 200
+		size_hint:0.5, 1
+<List_screen>:
+	ListView:
+		id: list_of_companies
+		adapter:
+			ListAdapter(data=['RPOWER','TCS','ADVANIHOTR'],cls=main.showCurrentSituation)
+<showCurrentSituation>:
+	
+	on_press: app.root.show_current_stocks(self.text)
+<stocksAtGlance>:
+	BoxLayout:
+		orientation:'vertical'
+		Label:
+			text:'Company:{}'.format(root.company)
+		Label:
+			text:'Current Price: {}'.format(root.l_cur)
+		Label:
+			text:'Comes Under : {}'.format(root.Dep)
+		Label:
+			text:'Fixed Content : {}'.format(root.l_fix)
+	Button:
+		text: "See Details"
+		size_hint:0.1,0.1
+		pos:700,170
+		on_press:root.fill_details()
+List_screen:
