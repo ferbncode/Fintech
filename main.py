@@ -4,6 +4,7 @@ from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
 from kivy.uix.listview import ListItemButton
 import ast
+from kivy.uix.floatlayout import FloatLayout
 class fintech(App):
     pass
 
@@ -20,6 +21,8 @@ class List_screen(ListView):
         details = details.replace("]","")
         details = details.replace(" ","")
         details = ast.literal_eval(details)
+        self.clear_widgets()
+        self.add_widget(stocksAtGlance())
 
 
 
