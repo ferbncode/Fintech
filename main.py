@@ -1,9 +1,9 @@
 from kivy.app import App
 import requests
-from kivy.properties import StringProperty 
+import json
+from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
 from kivy.uix.listview import ListItemButton
-import ast
 from kivy.uix.floatlayout import FloatLayout
 
 class fintech(App):
@@ -19,14 +19,8 @@ class List_screen(FloatLayout):
     def show_current_stocks(self,company):
         r = requests.get('http://finance.google.com/finance/info?client=ig&q=NSE:{}'.format(company))
         global details
-        details = r.text 
-        details = details.encode()
-        details = details.replace("\n","")
-        details = details.replace("//","")
-        details = details.replace("[","")
-        details = details.replace("]","")
-        details = details.replace(" ","")
-        details = ast.literal_eval(details)
+        details = r.text
+        details = json.loads(details[3:])[0]
         self.clear_widgets()
         self.add_widget(stocksAtGlance())
         self.company = details["t"]
@@ -41,7 +35,7 @@ class showCurrentSituation(ListItemButton):
 class stocksAtGlance(FloatLayout):
     def fill_details(self):
         pass
-    
+
 
 
 if __name__=='__main__':
