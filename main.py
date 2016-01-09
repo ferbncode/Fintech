@@ -5,10 +5,11 @@ from kivy.properties import NumericProperty
 from kivy.uix.listview import ListItemButton
 import ast
 from kivy.uix.floatlayout import FloatLayout
+
 class fintech(App):
     pass
 
-class List_screen(ListView):
+class List_screen(FloatLayout):
 
     def show_current_stocks(self,company):
         r = requests.get('http://finance.google.com/finance/info?client=ig&q=NSE:{}'.format(company))
